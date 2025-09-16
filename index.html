@@ -71,19 +71,6 @@
         </div>
     </div>
 
-    <!-- API Key Input -->
-    <div class="w-full max-w-xl mt-8">
-        <label for="apiKeyInput" class="block text-sm font-medium text-gray-400 mb-2">
-            আপনার Google AI API কী এখানে দিন
-        </label>
-        <input
-            type="password"
-            id="apiKeyInput"
-            placeholder="আপনার API কী এখানে পেস্ট করুন..."
-            class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
-        />
-    </div>
-
     <button
         id="tryOnButton"
         class="mt-12 px-10 py-4 text-xl font-bold rounded-full shadow-lg transition-all duration-300 transform
@@ -121,7 +108,6 @@
     <script>
         const userImageInput = document.getElementById('userImageInput');
         const outfitImageInput = document.getElementById('outfitImageInput');
-        const apiKeyInput = document.getElementById('apiKeyInput');
         const userImagePreview = document.getElementById('userImage');
         const outfitImagePreview = document.getElementById('outfitImage');
         const tryOnButton = document.getElementById('tryOnButton');
@@ -163,15 +149,9 @@
         const handleTryOn = async () => {
             const userFile = userImageInput.files[0];
             const outfitFile = outfitImageInput.files[0];
-            const apiKey = apiKeyInput.value.trim();
 
             if (!userFile || !outfitFile) {
                 errorDisplay.textContent = 'Please upload both a picture of yourself and an outfit.';
-                return;
-            }
-
-            if (!apiKey) {
-                errorDisplay.textContent = 'Please enter your Google AI API Key.';
                 return;
             }
 
@@ -205,6 +185,7 @@
                     },
                 };
 
+                const apiKey = "";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${apiKey}`;
 
                 let retries = 0;
